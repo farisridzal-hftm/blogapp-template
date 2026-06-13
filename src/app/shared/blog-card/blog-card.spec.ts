@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogCard } from './blog-card';
-import { Blog } from '../models/blog.interface';
+import { Blog } from '../models/blog';
 
 describe('BlogCard', () => {
   let component: BlogCard;

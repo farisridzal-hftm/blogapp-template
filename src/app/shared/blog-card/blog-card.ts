@@ -2,7 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Blog } from '../models/blog.interface';
+import { Blog } from '../models/blog';
 
 @Component({
   selector: 'app-blog-card',
