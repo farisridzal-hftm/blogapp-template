@@ -10,4 +10,4 @@ export type Blog = {
   headerImageUrl?: string;
   createdAt: string;
   updatedAt: string;
-};
+}
