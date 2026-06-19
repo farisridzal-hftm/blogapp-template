@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
   <span class="spacer"></span>
+
+  <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+    Blog
+  </a>
 </mat-toolbar>
 
 <main class="content">

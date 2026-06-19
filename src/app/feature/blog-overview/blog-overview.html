@@ -1,0 +1,11 @@
+<h1>Blog</h1>
+
+@for (blog of blogs; track blog.id) {
+  <article>
+    <h2>{{ blog.title }}</h2>
+    <p>{{ blog.contentPreview }}</p>
+    <p>Von {{ blog.author }}</p>
+
+    <a [routerLink]="['/blog', blog.id]">Details anzeigen</a>
+  </article>
+}

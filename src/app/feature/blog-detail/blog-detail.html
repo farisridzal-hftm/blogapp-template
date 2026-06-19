@@ -1,0 +1,15 @@
+@if (blog(); as blogPost) {
+  <article>
+    <h1>{{ blogPost.title }}</h1>
+
+    @if (blogPost.headerImageUrl) {
+      <img [src]="blogPost.headerImageUrl" [alt]="blogPost.title" />
+    }
+
+    <p>Von {{ blogPost.author }}</p>
+    <p>{{ blogPost.contentPreview }}</p>
+    <p>{{ blogPost.likes }} Likes · {{ blogPost.comments }} Kommentare</p>
+  </article>
+} @else {
+  <p>Blogpost nicht gefunden.</p>
+}
