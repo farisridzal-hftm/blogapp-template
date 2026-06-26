@@ -1,0 +1,28 @@
+<mat-card>
+  @if (model().headerImageUrl) {
+    <img mat-card-image [src]="model().headerImageUrl" [alt]="model().title" />
+  }
+
+  <mat-card-header>
+    <mat-card-title>{{ model().title }}</mat-card-title>
+    <mat-card-subtitle>{{ model().author }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{ model().contentPreview }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-icon-button type="button" (click)="onLike()">
+      <mat-icon>
+        {{ model().likedByMe ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
+
+    <span>{{ model().likes }}</span>
+
+    <span class="spacer"></span>
+
+    <a mat-button [routerLink]="['/blog', model().id]">Details</a>
+  </mat-card-actions>
+</mat-card>
