@@ -1,20 +1,4 @@
-@use '@angular/material' as mat;
-
-// ── Light theme (azure primary) ──
-$light-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-  )
-);
-
-// ── Apply light theme as default on <html> ──
-html {
-  @include mat.all-component-themes($light-theme);
-}
+@use 'theme';
 
 html,
 body {

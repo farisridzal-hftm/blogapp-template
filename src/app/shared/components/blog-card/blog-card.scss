@@ -1,3 +1,32 @@
-.spacer {
-  flex: 1 1 auto;
+@use 'mixins' as *;
+
+mat-card {
+  border-radius: var(--mat-sys-corner-large);
+  overflow: hidden;
+  border: 1px solid var(--mat-sys-outline-variant);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+    @include card-shadow;
+  }
+
+  img[mat-card-image] {
+    height: 180px;
+    object-fit: cover;
+  }
+
+  mat-card-subtitle {
+    color: var(--mat-sys-primary);
+  }
+
+  mat-card-actions {
+    @include flex-center($justify: flex-start);
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+  }
 }

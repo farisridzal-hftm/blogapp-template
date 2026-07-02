@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+
+$_primary: mat.$violet-palette;
+$_tertiary: mat.$rose-palette;
+
+@mixin _colors($type) {
+  @include mat.theme(
+    (
+      color: (
+        primary: $_primary,
+        tertiary: $_tertiary,
+        theme-type: $type,
+      ),
+    )
+  );
+}
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: $_primary,
+        tertiary: $_tertiary,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light-theme) {
+    @include _colors(dark);
+  }
+}
+
+html.dark-theme {
+  @include _colors(dark);
+}
+
+html.light-theme {
+  @include _colors(light);
+}
