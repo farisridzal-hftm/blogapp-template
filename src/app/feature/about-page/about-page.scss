@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 section {
-  line-height: 1.6;
+  line-height: $line-height-base;
 }

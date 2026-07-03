@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+@mixin flex-center($justify: center) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 $spacing-xs $spacing-sm rgba(0, 0, 0, 0.15);
+}
+
+@mixin responsive-grid($min-width: 280px, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
