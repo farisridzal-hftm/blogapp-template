@@ -7,6 +7,16 @@ export const routes: Routes = [
     component: BlogOverviewPage,
   },
   {
+    path: 'blog/new',
+    loadComponent: () =>
+      import('./feature/blog-form-page/blog-form-page').then((m) => m.BlogFormPage),
+  },
+  {
+    path: 'blog/:id/edit',
+    loadComponent: () =>
+      import('./feature/blog-form-page/blog-form-page').then((m) => m.BlogFormPage),
+  },
+  {
     path: 'blog/:id',
     loadComponent: () =>
       import('./feature/blog-detail-page/blog-detail-page').then((m) => m.BlogDetailPage),

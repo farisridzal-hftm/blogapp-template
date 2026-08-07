@@ -23,6 +23,14 @@
 
     <span class="spacer"></span>
 
+    <button mat-icon-button type="button" (click)="onEdit()" aria-label="Blog bearbeiten">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <button mat-icon-button type="button" (click)="onRemove()" aria-label="Blog loeschen">
+      <mat-icon>delete</mat-icon>
+    </button>
+
     <a mat-button [routerLink]="['/blog', model().id]">Details</a>
   </mat-card-actions>
 </mat-card>

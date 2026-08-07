@@ -1,7 +1,28 @@
-<section>
-  @for (blog of blogs(); track blog.id) {
-    <app-blog-card [model]="blog" (liked)="toggleLike($event)" />
-  } @empty {
-    <p>Keine Blog-Posts vorhanden.</p>
-  }
-</section>
+<div class="overview-header">
+  <h1>Blog</h1>
+
+  <a mat-flat-button routerLink="/blog/new">
+    <mat-icon>add</mat-icon>
+    Neuer Blog
+  </a>
+</div>
+
+@if (loading()) {
+  <div class="loading">
+    <mat-spinner diameter="48" />
+    <p>Laden...</p>
+  </div>
+} @else {
+  <section>
+    @for (blog of blogs(); track blog.id) {
+      <app-blog-card
+        [model]="blog"
+        (liked)="toggleLike($event)"
+        (edit)="editBlog($event)"
+        (remove)="deleteBlog($event)"
+      />
+    } @empty {
+      <p>Keine Blog-Posts vorhanden.</p>
+    }
+  </section>
+}
