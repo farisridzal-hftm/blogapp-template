@@ -23,6 +23,8 @@ interface LogoutResponse {
 export class AuthStore {
   private readonly authUrl = `${environment.bffUrl}/auth`;
 
+  readonly enabled = environment.authEnabled;
+
   readonly isAuthenticated = signal(false);
   readonly user = signal<UserInfo | null>(null);
   readonly loading = signal(true);
@@ -36,6 +38,12 @@ export class AuthStore {
   }
 
   async checkSession(): Promise<void> {
+    if (!this.enabled) {
+      this.clearUser();
+      this.loading.set(false);
+      return;
+    }
+
     this.loading.set(true);
 
     try {
@@ -51,8 +59,7 @@ export class AuthStore {
       this.user.set(session.user);
     } catch (error) {
       console.error('Session konnte nicht geprueft werden:', error);
-      this.isAuthenticated.set(false);
-      this.user.set(null);
+      this.clearUser();
     } finally {
       this.loading.set(false);
     }
@@ -72,16 +79,21 @@ export class AuthStore {
 
       const { logoutUrl } = (await response.json()) as LogoutResponse;
 
-      this.isAuthenticated.set(false);
-      this.user.set(null);
+      this.clearUser();
 
       window.location.href = logoutUrl;
     } catch (error) {
       console.error('Logout fehlgeschlagen:', error);
+      window.location.href = '/';
     }
   }
 
   hasRole(role: string): boolean {
     return this.roles().includes(role);
+  }
+
+  private clearUser(): void {
+    this.isAuthenticated.set(false);
+    this.user.set(null);
   }
 }

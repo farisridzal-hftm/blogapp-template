@@ -6,6 +6,10 @@ export const authGuard: CanMatchFn = async (route: Route, segments: UrlSegment[]
   const authStore = inject(AuthStore);
   const router = inject(Router);
 
+  if (!authStore.enabled) {
+    return router.createUrlTree(['/']);
+  }
+
   await authStore.ready;
 
   const returnUrl = `/${segments.map((segment) => segment.path).join('/')}`;
