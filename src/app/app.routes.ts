@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/auth';
 
 export const routes: Routes = [
   {
@@ -7,12 +8,20 @@ export const routes: Routes = [
       import('./feature/blog-overview-page/blog-overview-page').then((m) => m.BlogOverviewPage),
   },
   {
+    path: 'login',
+    loadComponent: () => import('./feature/login-page/login-page').then((m) => m.LoginPage),
+  },
+  {
     path: 'blog/new',
+    canMatch: [authGuard],
+    data: { roles: ['user'] },
     loadComponent: () =>
       import('./feature/blog-form-page/blog-form-page').then((m) => m.BlogFormPage),
   },
   {
     path: 'blog/:id/edit',
+    canMatch: [authGuard],
+    data: { roles: ['user'] },
     loadComponent: () =>
       import('./feature/blog-form-page/blog-form-page').then((m) => m.BlogFormPage),
   },
