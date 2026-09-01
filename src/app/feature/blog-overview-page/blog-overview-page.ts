@@ -1,43 +1,38 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Blog } from '../../shared/blog';
-import { BlogService } from '../../shared/blog.service';
+import { ALL_AUTHORS, BlogStateService } from '../../shared/blog-state.service';
 import { BlogCard } from '../../shared/components/blog-card/blog-card';
 
 @Component({
   selector: 'app-blog-overview-page',
-  imports: [BlogCard, RouterLink, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [
+    BlogCard,
+    RouterLink,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+  ],
   templateUrl: './blog-overview-page.html',
   styleUrl: './blog-overview-page.scss',
 })
-export class BlogOverviewPage {
-  private readonly blogService = inject(BlogService);
+export class BlogOverviewPage implements OnInit {
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
 
-  blogs = signal<Blog[]>([]);
-  loading = signal(false);
+  readonly state = inject(BlogStateService);
+  readonly ALL_AUTHORS = ALL_AUTHORS;
 
-  constructor() {
-    void this.loadBlogs();
-  }
-
-  private async loadBlogs(): Promise<void> {
-    this.loading.set(true);
-
-    try {
-      this.blogs.set(await this.blogService.getBlogs());
-    } catch {
-      this.snackBar.open('Blogs konnten nicht geladen werden.', 'OK', {
-        duration: 5000,
-      });
-    } finally {
-      this.loading.set(false);
-    }
+  ngOnInit(): void {
+    void this.state.loadBlogs();
   }
 
   editBlog(blog: Blog): void {
@@ -49,28 +44,14 @@ export class BlogOverviewPage {
       return;
     }
 
-    try {
-      await this.blogService.deleteBlog(String(blogId));
-      this.blogs.update((blogs) => blogs.filter((blog) => blog.id !== blogId));
+    if (await this.state.deleteBlog(blogId)) {
       this.snackBar.open('Blog geloescht.', 'OK', { duration: 3000 });
-    } catch {
+    } else {
       this.snackBar.open('Loeschen fehlgeschlagen.', 'OK', { duration: 5000 });
     }
   }
 
   toggleLike(blogId: number): void {
-    this.blogs.update((blogs) =>
-      blogs.map((blog) => {
-        if (blog.id !== blogId) {
-          return blog;
-        }
-
-        return {
-          ...blog,
-          likedByMe: !blog.likedByMe,
-          likes: blog.likedByMe ? blog.likes - 1 : blog.likes + 1,
-        };
-      }),
-    );
+    this.state.toggleLike(blogId);
   }
 }

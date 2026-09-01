@@ -1,5 +1,14 @@
 <div class="overview-header">
-  <h1>Blog</h1>
+  <div>
+    <h1>Blog</h1>
+    <p class="blog-count">
+      @if (state.selectedAuthor() === ALL_AUTHORS) {
+        {{ state.blogCount() }} Blogs
+      } @else {
+        {{ state.filteredBlogs().length }} von {{ state.blogCount() }} Blogs
+      }
+    </p>
+  </div>
 
   <a mat-flat-button routerLink="/blog/new">
     <mat-icon>add</mat-icon>
@@ -7,14 +16,31 @@
   </a>
 </div>
 
-@if (loading()) {
+<mat-form-field appearance="fill" class="author-filter">
+  <mat-label>Autor</mat-label>
+
+  <mat-select [value]="state.selectedAuthor()" (valueChange)="state.setAuthor($event)">
+    <mat-option [value]="ALL_AUTHORS">Alle Autoren</mat-option>
+
+    @for (author of state.authors(); track author) {
+      <mat-option [value]="author">{{ author }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+@if (state.loading()) {
   <div class="loading">
     <mat-spinner diameter="48" />
     <p>Laden...</p>
   </div>
+} @else if (state.error()) {
+  <div class="error">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ state.error() }}</p>
+  </div>
 } @else {
   <section>
-    @for (blog of blogs(); track blog.id) {
+    @for (blog of state.filteredBlogs(); track blog.id) {
       <app-blog-card
         [model]="blog"
         (liked)="toggleLike($event)"
