@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["start"],
       "port": 4200
+    },
+    {
+      "name": "blogapp-frontend-only",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:fe"],
+      "port": 4200
     }
   ]
 }

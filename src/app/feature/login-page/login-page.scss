@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+.login-card {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-md;
+  color: var(--mat-sys-error);
+}
