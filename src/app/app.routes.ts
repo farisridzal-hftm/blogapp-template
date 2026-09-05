@@ -12,6 +12,11 @@ export const routes: Routes = [
     loadComponent: () => import('./feature/login-page/login-page').then((m) => m.LoginPage),
   },
   {
+    path: 'blog/create',
+    loadComponent: () =>
+      import('./feature/blog-create/blog-create').then((m) => m.BlogCreateComponent),
+  },
+  {
     path: 'blog/new',
     canMatch: [authGuard],
     data: { roles: ['user'] },
