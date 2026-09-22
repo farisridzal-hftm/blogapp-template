@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'variables' as *;
 
 .overview-header {
   display: flex;
@@ -12,8 +12,23 @@
   }
 }
 
-section {
-  @include responsive-grid();
+.blog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.blog-card {
+  flex: 1 1 100%;
+  min-width: 0;
+
+  @media (min-width: $breakpoint-tablet) {
+    flex: 0 0 calc((100% - #{$spacing-md}) / 2);
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    flex: 0 0 calc((100% - 2 * #{$spacing-md}) / 3);
+  }
 }
 
 .blog-count {

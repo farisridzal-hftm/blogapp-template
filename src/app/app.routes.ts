@@ -13,6 +13,8 @@ export const routes: Routes = [
   },
   {
     path: 'blog/create',
+    canMatch: [authGuard],
+    data: { roles: ['user'] },
     loadComponent: () =>
       import('./feature/blog-create/blog-create').then((m) => m.BlogCreateComponent),
   },

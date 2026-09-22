@@ -39,9 +39,10 @@
     <p>{{ state.error() }}</p>
   </div>
 } @else {
-  <section>
+  <section class="blog-grid">
     @for (blog of state.filteredBlogs(); track blog.id) {
       <app-blog-card
+        class="blog-card"
         [model]="blog"
         (liked)="toggleLike($event)"
         (edit)="editBlog($event)"

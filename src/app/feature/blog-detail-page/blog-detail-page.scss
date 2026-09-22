@@ -1,6 +1,12 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+:host {
+  display: block;
+  max-width: $content-max-width;
+  margin: 0 auto;
+}
+
 mat-card {
   margin-bottom: $spacing-md;
 
