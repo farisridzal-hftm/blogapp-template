@@ -1,0 +1,50 @@
+<section class="create-card">
+  <h1>Neuer Blog-Beitrag</h1>
+
+  <form (submit)="onSubmit($event)">
+    <div class="field">
+      <label for="title">Titel</label>
+      <input id="title" type="text" [formField]="blogForm.title" />
+
+      @if (blogForm.title().touched() && blogForm.title().invalid()) {
+        <ul class="errors">
+          @for (error of blogForm.title().errors(); track error.kind) {
+            <li>{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+
+    <div class="field">
+      <label for="content">Inhalt</label>
+      <textarea id="content" rows="6" [formField]="blogForm.content"></textarea>
+
+      @if (blogForm.content().touched() && blogForm.content().invalid()) {
+        <ul class="errors">
+          @for (error of blogForm.content().errors(); track error.kind) {
+            <li>{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+
+    <div class="field">
+      <label for="category">Kategorie</label>
+      <select id="category" [formField]="blogForm.category">
+        <option value="general">Allgemein</option>
+        <option value="tech">Technik</option>
+        <option value="lifestyle">Lifestyle</option>
+      </select>
+
+      @if (blogForm.category().touched() && blogForm.category().invalid()) {
+        <ul class="errors">
+          @for (error of blogForm.category().errors(); track error.kind) {
+            <li>{{ error.message }}</li>
+          }
+        </ul>
+      }
+    </div>
+
+    <button type="submit" [disabled]="blogForm().invalid()">Beitrag erstellen</button>
+  </form>
+</section>
