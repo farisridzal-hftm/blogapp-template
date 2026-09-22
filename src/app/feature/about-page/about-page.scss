@@ -1,5 +1,7 @@
 @use 'variables' as *;
 
 section {
+  max-width: $content-max-width;
+  margin: 0 auto;
   line-height: $line-height-base;
 }

@@ -1,0 +1,79 @@
+@use 'variables' as *;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 240px;
+}
+
+.sidenav-toolbar {
+  background: inherit;
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
+  color: var(--mat-sys-on-primary);
+  --mat-button-text-label-text-color: var(--mat-sys-on-primary);
+  --mat-icon-button-icon-color: var(--mat-sys-on-primary);
+}
+
+.brand-icon {
+  flex-shrink: 0;
+  margin-right: $spacing-sm;
+}
+
+.title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+
+  a,
+  button {
+    justify-content: flex-start;
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+  }
+}
+
+.active-link {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.user-name {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-size: 0.875rem;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: 0 $spacing-sm;
+  }
+}
