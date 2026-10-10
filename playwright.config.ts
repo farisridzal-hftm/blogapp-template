@@ -9,6 +9,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:4200',
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
@@ -17,7 +18,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: process.env['CI'] ? 'npm run serve:e2e' : 'npm run start',
+    command: process.env['CI'] ? 'npm run serve:e2e' : 'npm run start:fe',
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env['CI'],
   },
