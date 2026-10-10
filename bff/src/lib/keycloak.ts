@@ -46,11 +46,24 @@ export function randomState(): string {
   return randomBytes(16).toString('base64url');
 }
 
+const RETURN_URL_BASE = 'http://return-url.invalid';
+
 export function safeReturnUrl(url: string | null | undefined): string {
-  if (!url?.startsWith('/') || url.startsWith('//') || url.startsWith('/\\')) {
+  if (!url?.startsWith('/')) {
     return '/';
   }
-  return url;
+
+  let parsed: URL;
+  try {
+    parsed = new URL(url, RETURN_URL_BASE);
+  } catch {
+    return '/';
+  }
+
+  if (parsed.origin !== RETURN_URL_BASE) {
+    return '/';
+  }
+  return `${parsed.pathname}${parsed.search}${parsed.hash}`;
 }
 
 export function buildAuthorizeUrl(state: string, codeChallenge: string): string {

@@ -1,35 +1,12 @@
 @use 'variables' as *;
 
-mat-toolbar.app-toolbar {
-  background: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
-  color: var(--mat-sys-on-primary);
-  --mat-button-text-label-text-color: var(--mat-sys-on-primary);
-  --mat-icon-button-icon-color: var(--mat-sys-on-primary);
-
-  .brand-icon {
-    margin-right: $spacing-sm;
-  }
-
-  a.active-link {
-    font-weight: 700;
-    text-decoration: underline;
-  }
-
-  .user-name {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-xs;
-    margin-left: $spacing-sm;
-    font-size: 0.875rem;
-  }
-}
-
-.spacer {
-  flex: 1 1 auto;
+:host {
+  display: block;
+  height: 100%;
 }
 
 .content {
-  max-width: $content-max-width;
+  max-width: $layout-max-width;
   margin: $spacing-xl auto;
   padding: 0 $spacing-md;
 }

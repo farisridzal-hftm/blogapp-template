@@ -14,13 +14,17 @@ test('safeReturnUrl rejects anything that could leave the site', () => {
     'https://phishing.example/login',
     '//phishing.example/login',
     '/\\phishing.example',
+    '/\t/phishing.example',
+    '/\t\\phishing.example',
+    '/\n/phishing.example',
     '',
     null,
     undefined,
   ]) {
-    assert.equal(safeReturnUrl(hostile), '/', `should reject ${hostile}`);
+    assert.equal(safeReturnUrl(hostile), '/', `should reject ${JSON.stringify(hostile)}`);
   }
   assert.equal(safeReturnUrl('/blog/new'), '/blog/new');
+  assert.equal(safeReturnUrl('/blog/1/edit?tab=a#top'), '/blog/1/edit?tab=a#top');
 });
 
 test('createPkcePair derives an S256 challenge from the verifier', async () => {

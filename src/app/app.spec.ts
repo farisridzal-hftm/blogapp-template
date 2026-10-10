@@ -22,7 +22,7 @@ describe('App', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('mat-toolbar')?.textContent).toContain(
+    expect(compiled.querySelector('mat-toolbar.app-toolbar')?.textContent).toContain(
       'HFTM Web Applications (IN353)',
     );
   });
